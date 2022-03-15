@@ -1,6 +1,6 @@
 package com.smartbear.tcpbench;
 
-import com.smartbear.tcpbench.rtptorrent.RtpTorrent;
+import com.smartbear.tcpbench.rtptorrent.RtpTorrentQuery;
 import me.tongfei.progressbar.ProgressBar;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -37,7 +37,7 @@ public class Main {
         String engineClass = cmd.getOptionValue(engineOpt);
         TcpEngine tcpEngine = (TcpEngine) Main.class.getClassLoader().loadClass(engineClass).getConstructor().newInstance();
 
-        Query query = RtpTorrent.makeQuery(rtpTorrentProjectDir);
+        Query query = RtpTorrentQuery.create(rtpTorrentProjectDir);
 
         tcpEngine.prepare(projectName);
 
