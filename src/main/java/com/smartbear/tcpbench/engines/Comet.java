@@ -51,7 +51,7 @@ public class Comet implements TcpEngine {
     @Override
     public void defineTestCycle(String testCycleId, List<Verdict> verdicts, Query query) throws ApiException {
         List<String> shas = query.getShas(testCycleId);
-        Set<String> patches = shas.stream().flatMap(sha -> query.getModifiedFiles(sha).stream()).collect(Collectors.toSet());
+        Set<String> patches = shas.stream().flatMap(sha -> query.getModifiedFiles(sha, ".java$").stream()).collect(Collectors.toSet());
         int filesChanged = patches.size();
 
         List<Test> tests = verdicts.stream().map(verdict -> new Test().id(verdict.getTestId())).collect(Collectors.toList());
