@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class DefaultEngine implements TcpEngine {
+public abstract class AbstractEngine implements TcpEngine {
     private final Map<String, List<Verdict>> verdictsByTestCycleId = new HashMap<>();
 
     @Override
@@ -16,12 +16,12 @@ public abstract class DefaultEngine implements TcpEngine {
     }
 
     @Override
-    public void defineTestCycle(String testCycleId, List<Verdict> verdicts, Query query) throws Exception {
+    public void defineTestCycle(String testCycleId, List<Verdict> verdicts, Query query) {
         verdictsByTestCycleId.put(testCycleId, verdicts);
     }
 
     @Override
-    public void train(String testCycleId, List<Verdict> verdicts) throws Exception {
+    public void train(String testCycleId, List<Verdict> verdicts) {
 
     }
 

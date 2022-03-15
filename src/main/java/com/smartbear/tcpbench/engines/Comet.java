@@ -49,7 +49,7 @@ public class Comet implements TcpEngine {
     }
 
     @Override
-    public void defineTestCycle(String testCycleId, List<Verdict> verdicts, Query query) throws ApiException {
+    public void defineTestCycle(String testCycleId, List<Verdict> verdicts, Query query) {
         List<String> shas = query.getShas(testCycleId);
         Set<String> patches = shas.stream().flatMap(sha -> query.getModifiedFiles(sha, ".java$").stream()).collect(Collectors.toSet());
         int filesChanged = patches.size();
@@ -61,18 +61,27 @@ public class Comet implements TcpEngine {
                 .tests(tests);
 
         TestCyclesApi testCyclesApi = new TestCyclesApi(client);
-        testCyclesApi.addTestCycle(projectName, cycle);
+        try {
+            testCyclesApi.addTestCycle(projectName, cycle);
+        } catch (ApiException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public List<String> getOrdering(String testCycleId) throws ApiException {
+    public List<String> getOrdering(String testCycleId) {
         PrioritizationsApi prioritizationsApi = new PrioritizationsApi(client);
-        Prioritization prioritization = prioritizationsApi.prioritize(projectName, String.valueOf(testCycleId));
-        return prioritization.getTests();
+        Prioritization prioritization = null;
+        try {
+            prioritization = prioritizationsApi.prioritize(projectName, String.valueOf(testCycleId));
+            return prioritization.getTests();
+        } catch (ApiException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public void train(String testCycleId, List<Verdict> verdicts) throws ApiException {
+    public void train(String testCycleId, List<Verdict> verdicts) {
         TestsApi testsApi = new TestsApi(client);
         List<TestVerdict> testVerdicts = verdicts.stream()
                 .map(verdict -> new TestVerdict()
@@ -81,7 +90,11 @@ public class Comet implements TcpEngine {
                         .duration(verdict.getDuration().toMillis() * 1000f)
                         .fail(verdict.isFailure()))
                 .collect(Collectors.toList());
-        testsApi.updateSuite(projectName, String.valueOf(testCycleId), testVerdicts);
+        try {
+            testsApi.updateSuite(projectName, String.valueOf(testCycleId), testVerdicts);
+        } catch (ApiException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

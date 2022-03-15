@@ -8,7 +8,7 @@ public interface Query {
     /**
      * @return all test cycles, chronologically ordered
      */
-    List<String> getOrderedTestCycleIds();
+    List<String> getOrderedFailingTestCycleIds();
 
     /**
      * @param testCycleId the test cycle id

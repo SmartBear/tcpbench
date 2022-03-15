@@ -49,8 +49,9 @@ public class RtpTorrentQuery implements Query {
     }
 
     @Override
-    public List<String> getOrderedTestCycleIds() {
+    public List<String> getOrderedFailingTestCycleIds() {
         return testsTable.stringColumn("travisJobId")
+                .where(testsTable.intColumn("failures").isGreaterThan(0))
                 .unique()
                 .sorted(Comparator.comparingInt(Integer::parseInt))
                 .asList();
