@@ -1,0 +1,18 @@
+set datafile separator ','
+set terminal svg size 800,600
+set title "APFD"
+set style fill solid 0.25 border -1
+set style boxplot outliers pointtype 7
+set style data boxplot
+set boxwidth 0.7 absolute
+
+set key autotitle columnheader
+
+set xtics border in scale 0,0 nomirror norotate  offset character 0, 0, 0 autojustify
+set xtics norangelimit
+set xtics () # remove xtics
+do for [i=1:words(filenames)] {
+    set xtics add (system("echo ".word(filenames,i)." | sed -E 's/.*\\.([a-zA-Z]+).csv/\\1/'") i)
+}
+
+plot for [i=1:words(filenames)] word(filenames,i) u (i):1 w boxplot notitle
