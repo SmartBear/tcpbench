@@ -13,9 +13,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static tech.tablesaw.api.ColumnType.DOUBLE;
-import static tech.tablesaw.api.ColumnType.INTEGER;
-import static tech.tablesaw.api.ColumnType.STRING;
+import static tech.tablesaw.api.ColumnType.*;
 
 public class RtpTorrentQuery implements Query {
     private final Table testsTable;
@@ -78,7 +76,7 @@ public class RtpTorrentQuery implements Query {
 
     @Override
     public Set<String> getModifiedFiles(String sha) {
-        Table patches = patchesTable.where(patchesTable.stringColumn("sha").isEqualTo(sha));
+        Table patches = patchesTable.where(patchesTable.stringColumn("sha").isEqualTo(sha).and(patchesTable.stringColumn("name").endsWith(".java")));
         return patches.stringColumn("name").asSet();
     }
 
