@@ -9,7 +9,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static com.smartbear.tcpbench.Apfd.computeApfd;
 
@@ -44,37 +45,25 @@ public class Main {
 
         tcpEngine.prepare(projectName);
 
-        int testCycleNumber = 1;
-        List<String> testCycleIds = query.getOrderedTestCycleIds();
+        List<String> testCycleIds = query.getOrderedFailingTestCycleIds();
+        int cycleCount = Math.min(trainingCount + predictionCount, testCycleIds.size());
 
-        int cycleCount = trainingCount + predictionCount;
-        try (ProgressBar pb = new ProgressBar("Test Cycle", cycleCount)) {
-            for (String testCycleId : testCycleIds) {
-                List<Verdict> verdicts = query.getVerdicts(testCycleId);
-                Optional<Verdict> firstFailure = verdicts.stream().filter(Verdict::isFailure).findFirst();
-                if (!firstFailure.isPresent()) {
-                    // Ignore verdicts without failures
-                    continue;
-                }
+        Stream<Integer> testCycleIndexes = ProgressBar.wrap(IntStream.range(0, cycleCount), "Test Cycle");
+        testCycleIndexes.forEach((testCycleIndex) -> {
+            String testCycleId = testCycleIds.get(testCycleIndex);
+            List<Verdict> verdicts = query.getVerdicts(testCycleId);
+            tcpEngine.defineTestCycle(testCycleId, verdicts, query);
 
-                tcpEngine.defineTestCycle(testCycleId, verdicts, query);
-
-                if (verdicts.size() >= MIN_TEST_CASE_COUNT_FOR_PRIORITIZATION && testCycleNumber >= trainingCount) {
-                    List<String> ordering = tcpEngine.getOrdering(testCycleId);
-                    if (ordering != null) {
-                        List<String> orderingWithoutDuplicates = new ArrayList<>(new LinkedHashSet<>(ordering));
-                        double apfd = computeApfd(verdicts, orderingWithoutDuplicates, testCycleId);
-                        System.out.println(apfd);
-                    }
-                }
-
-                tcpEngine.train(testCycleId, verdicts);
-                testCycleNumber++;
-                pb.step();
-                if (testCycleNumber > cycleCount) {
-                    break;
+            if (verdicts.size() >= MIN_TEST_CASE_COUNT_FOR_PRIORITIZATION && testCycleIndex >= trainingCount) {
+                List<String> ordering = tcpEngine.getOrdering(testCycleId);
+                if (ordering != null) {
+                    List<String> orderingWithoutDuplicates = new ArrayList<>(new LinkedHashSet<>(ordering));
+                    double apfd = computeApfd(verdicts, orderingWithoutDuplicates, testCycleId);
+                    System.out.println(apfd);
                 }
             }
-        }
+
+            tcpEngine.train(testCycleId, verdicts);
+        });
     }
 }

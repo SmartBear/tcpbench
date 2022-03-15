@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class RandomOrder extends DefaultEngine {
+public class RandomOrder extends AbstractEngine {
     private final Random random = new Random(98765);
 
     @Override
