@@ -32,9 +32,6 @@
 ## [eclipse/jetty.project](https://github.com/eclipse/jetty.project)
 ![eclipse/jetty.project](eclipse@jetty.project.svg)
 
-## [facebook/buck](https://github.com/facebook/buck)
-![facebook/buck](facebook@buck.svg)
-
 ## [jOOQ/jOOQ](https://github.com/jOOQ/jOOQ)
 ![jOOQ/jOOQ](jOOQ@jOOQ.svg)
 

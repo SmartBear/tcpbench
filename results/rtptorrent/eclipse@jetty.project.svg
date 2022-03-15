@@ -97,18 +97,23 @@
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black'  d='M238.99,564.00  '/>	<g transform="translate(238.99,585.90)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="middle">
+	<path stroke='black'  d='M212.09,564.00  '/>	<g transform="translate(212.09,585.90)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="middle">
 		<text><tspan font-family="Arial" >OptimalOrder</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black'  d='M414.68,564.00  '/>	<g transform="translate(414.68,585.90)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="middle">
+	<path stroke='black'  d='M362.15,564.00  '/>	<g transform="translate(362.15,585.90)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="middle">
 		<text><tspan font-family="Arial" >InitialOrder</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black'  d='M590.36,564.00  '/>	<g transform="translate(590.36,585.90)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="middle">
+	<path stroke='black'  d='M512.21,564.00  '/>	<g transform="translate(512.21,585.90)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="middle">
 		<text><tspan font-family="Arial" >RandomOrder</tspan></text>
+	</g>
+</g>
+<g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
+	<path stroke='black'  d='M662.27,564.00  '/>	<g transform="translate(662.27,585.90)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="middle">
+		<text><tspan font-family="Arial" >Comet</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -122,12 +127,12 @@
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g stroke='none' shape-rendering='crispEdges'>
-		<polygon fill = 'rgb(148,   0, 211)' fill-opacity = '0.250000' points = '177.51,56.44 300.49,56.44 300.49,56.31 177.51,56.31 '/>
+		<polygon fill = 'rgb(148,   0, 211)' fill-opacity = '0.250000' points = '159.57,56.44 264.61,56.44 264.61,56.31 159.57,56.31 '/>
 	</g>
-	<path stroke='black'  d='M177.51,56.44 L300.49,56.44 L300.49,56.31 L177.51,56.31 L177.51,56.44 Z  '/>	<path stroke='black'  d='M177.51,56.39 L300.49,56.39 M239.00,56.44 M239.00,56.31 L239.00,56.29 M230.00,56.29 L248.00,56.29 M230.00,56.44
-		L248.00,56.44  '/>	<use xlink:href='#gpPt6' transform='translate(238.99,60.08) scale(4.50)' color='black'/>
-	<use xlink:href='#gpPt6' transform='translate(220.99,60.08) scale(4.50)' color='black'/>
-	<use xlink:href='#gpPt6' transform='translate(238.99,58.60) scale(4.50)' color='black'/>
+	<path stroke='black'  d='M159.57,56.44 L264.61,56.44 L264.61,56.31 L159.57,56.31 L159.57,56.44 Z  '/>	<path stroke='black'  d='M159.57,56.39 L264.61,56.39 M212.09,56.44 M212.09,56.31 L212.09,56.29 M203.09,56.29 L221.09,56.29 M203.09,56.44
+		L221.09,56.44  '/>	<use xlink:href='#gpPt6' transform='translate(212.09,60.08) scale(4.50)' color='black'/>
+	<use xlink:href='#gpPt6' transform='translate(194.09,60.08) scale(4.50)' color='black'/>
+	<use xlink:href='#gpPt6' transform='translate(212.09,58.60) scale(4.50)' color='black'/>
 </g>
 	</g>
 	<g id="gnuplot_plot_2" ><title>gnuplot_plot_2</title>
@@ -135,20 +140,34 @@
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g stroke='none' shape-rendering='crispEdges'>
-		<polygon fill = 'rgb(  0, 158, 115)' fill-opacity = '0.250000' points = '353.19,474.14 476.17,474.14 476.17,377.92 353.19,377.92 '/>
+		<polygon fill = 'rgb(  0, 158, 115)' fill-opacity = '0.250000' points = '309.63,474.14 414.69,474.14 414.69,377.92 309.63,377.92 '/>
 	</g>
-	<path stroke='black'  d='M353.19,474.14 L476.17,474.14 L476.17,377.92 L353.19,377.92 L353.19,474.14 Z  '/>	<path stroke='black'  d='M353.19,441.35 L476.17,441.35 M414.68,543.32 L414.68,474.14 M414.68,377.92 L414.68,242.22 M405.68,242.22 L423.68,242.22
-		M405.68,543.32 L423.68,543.32  '/></g>
+	<path stroke='black'  d='M309.63,474.14 L414.69,474.14 L414.69,377.92 L309.63,377.92 L309.63,474.14 Z  '/>	<path stroke='black'  d='M309.63,441.35 L414.69,441.35 M362.16,543.32 L362.16,474.14 M362.16,377.92 L362.16,242.22 M353.16,242.22 L371.16,242.22
+		M353.16,543.32 L371.16,543.32  '/></g>
 	</g>
 	<g id="gnuplot_plot_3" ><title>gnuplot_plot_3</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g stroke='none' shape-rendering='crispEdges'>
-		<polygon fill = 'rgb( 86, 180, 233)' fill-opacity = '0.250000' points = '528.87,428.16 651.85,428.16 651.85,230.90 528.87,230.90 '/>
+		<polygon fill = 'rgb( 86, 180, 233)' fill-opacity = '0.250000' points = '459.69,428.16 564.75,428.16 564.75,230.90 459.69,230.90 '/>
 	</g>
-	<path stroke='black'  d='M528.87,428.16 L651.85,428.16 L651.85,230.90 L528.87,230.90 L528.87,428.16 Z  '/>	<path stroke='black'  d='M528.87,328.30 L651.85,328.30 M590.36,551.86 L590.36,428.16 M590.36,230.90 L590.36,70.09 M581.36,70.09 L599.36,70.09
-		M581.36,551.86 L599.36,551.86  '/></g>
+	<path stroke='black'  d='M459.69,428.16 L564.75,428.16 L564.75,230.90 L459.69,230.90 L459.69,428.16 Z  '/>	<path stroke='black'  d='M459.69,328.30 L564.75,328.30 M512.22,551.86 L512.22,428.16 M512.22,230.90 L512.22,70.09 M503.22,70.09 L521.22,70.09
+		M503.22,551.86 L521.22,551.86  '/></g>
+	</g>
+	<g id="gnuplot_plot_4" ><title>gnuplot_plot_4</title>
+<g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
+</g>
+<g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
+	<g stroke='none' shape-rendering='crispEdges'>
+		<polygon fill = 'rgb(230, 159,   0)' fill-opacity = '0.250000' points = '609.75,207.93 714.81,207.93 714.81,65.50 609.75,65.50 '/>
+	</g>
+	<path stroke='black'  d='M609.75,207.93 L714.81,207.93 L714.81,65.50 L609.75,65.50 L609.75,207.93 Z  '/>	<path stroke='black'  d='M609.75,92.89 L714.81,92.89 M662.28,373.33 L662.28,207.93 M662.28,65.50 L662.28,56.39 M653.28,56.39 L671.28,56.39
+		M653.28,373.33 L671.28,373.33  '/>	<use xlink:href='#gpPt6' transform='translate(662.27,557.11) scale(4.50)' color='black'/>
+	<use xlink:href='#gpPt6' transform='translate(662.27,552.51) scale(4.50)' color='black'/>
+	<use xlink:href='#gpPt6' transform='translate(662.27,538.73) scale(4.50)' color='black'/>
+	<use xlink:href='#gpPt6' transform='translate(662.27,492.79) scale(4.50)' color='black'/>
+</g>
 	</g>
 <g fill="none" color="white" stroke="black" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
