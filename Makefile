@@ -27,7 +27,12 @@ svgs: results/rtptorrent/CloudifySource@cloudify.svg \
 
 results/rtptorrent/%.csv: target/tcpbench.jar
 	mkdir -p $(@D)
-	java -jar $< --rtptorrent $(TCP_TORRENT)/$$(basename $(@D)) --engine $$(basename $@ .csv) > $@.tmp
+	java -jar $< \
+		--rtptorrent $(TCP_TORRENT)/$$(basename $(@D)) \
+		--engine $$(basename $@ .csv) \
+		--training 10 \
+		--prediction 30 \
+		> $@.tmp
 	mv $@.tmp $@
 .PRECIOUS: results/rtptorrent/%.csv
 
