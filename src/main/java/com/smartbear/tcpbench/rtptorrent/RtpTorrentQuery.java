@@ -3,6 +3,7 @@ package com.smartbear.tcpbench.rtptorrent;
 import com.smartbear.tcpbench.Query;
 import com.smartbear.tcpbench.Verdict;
 import tech.tablesaw.api.ColumnType;
+import tech.tablesaw.api.StringColumn;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.io.csv.CsvReadOptions;
 
@@ -13,7 +14,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static tech.tablesaw.api.ColumnType.*;
+import static tech.tablesaw.api.ColumnType.DOUBLE;
+import static tech.tablesaw.api.ColumnType.INTEGER;
+import static tech.tablesaw.api.ColumnType.STRING;
 
 public class RtpTorrentQuery implements Query {
     private final Table testsTable;
@@ -75,8 +78,10 @@ public class RtpTorrentQuery implements Query {
     }
 
     @Override
-    public Set<String> getModifiedFiles(String sha) {
-        Table patches = patchesTable.where(patchesTable.stringColumn("sha").isEqualTo(sha).and(patchesTable.stringColumn("name").endsWith(".java")));
+    public Set<String> getModifiedFiles(String sha, String regexp) {
+        StringColumn shaColumn = patchesTable.stringColumn("sha");
+        StringColumn nameColumn = patchesTable.stringColumn("name");
+        Table patches = patchesTable.where(shaColumn.isEqualTo(sha).and(nameColumn.matchesRegex(regexp)));
         return patches.stringColumn("name").asSet();
     }
 
