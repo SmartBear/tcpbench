@@ -24,6 +24,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit</artifactId>
+            <version>6.1.0.202203080745-r</version>
+        </dependency>
+        <dependency>
             <groupId>tech.tablesaw</groupId>
             <artifactId>tablesaw-core</artifactId>
             <version>0.42.0</version>

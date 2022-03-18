@@ -1,5 +1,6 @@
 package com.smartbear.tcpbench.engines;
 
+import com.smartbear.tcpbench.Changes;
 import com.smartbear.tcpbench.Query;
 import com.smartbear.tcpbench.TcpEngine;
 import com.smartbear.tcpbench.Verdict;
@@ -10,14 +11,9 @@ import com.smartesting.comet.api.ProjectsApi;
 import com.smartesting.comet.api.TestCyclesApi;
 import com.smartesting.comet.api.TestsApi;
 import com.smartesting.comet.auth.ApiKeyAuth;
-import com.smartesting.comet.model.Prioritization;
-import com.smartesting.comet.model.Project;
-import com.smartesting.comet.model.Test;
-import com.smartesting.comet.model.TestCycle;
-import com.smartesting.comet.model.TestVerdict;
+import com.smartesting.comet.model.*;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.smartbear.tcpbench.Env.getEnv;
@@ -26,6 +22,7 @@ import static com.smartesting.comet.Configuration.getDefaultApiClient;
 public class Comet implements TcpEngine {
     private final ApiClient client;
     private String projectName;
+    private String previousSha;
 
     public Comet() {
         client = getDefaultApiClient();
@@ -51,13 +48,20 @@ public class Comet implements TcpEngine {
     @Override
     public void defineTestCycle(String testCycleId, List<Verdict> verdicts, Query query) {
         List<String> shas = query.getShas(testCycleId);
-        Set<String> patches = shas.stream().flatMap(sha -> query.getModifiedFiles(sha, ".java$").stream()).collect(Collectors.toSet());
-        int filesChanged = patches.size();
-
+        Changes changes = new Changes();
+        if (shas.size() > 0) {
+            if (previousSha != null) {
+                changes = query.getChanges(previousSha, shas.get(0), ".*.java$");
+            }
+            previousSha = shas.get(0);
+        }
         List<Test> tests = verdicts.stream().map(verdict -> new Test().id(verdict.getTestId())).collect(Collectors.toList());
         TestCycle cycle = new TestCycle()
                 .id(testCycleId)
-                .filesChanged(filesChanged)
+                .filesChanged(changes.getChangedFiles())
+                .insertions(changes.getLinesAdded())
+                .deletions(changes.getLinesDeleted())
+                .sinceLast(changes.getTimeDiff())
                 .tests(tests);
 
         TestCyclesApi testCyclesApi = new TestCyclesApi(client);

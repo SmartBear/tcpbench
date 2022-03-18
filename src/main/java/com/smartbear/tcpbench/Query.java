@@ -27,11 +27,19 @@ public interface Query {
     List<String> getShas(String testCycleId);
 
     /**
-     * @param sha a git sha
+     * @param sha    a git sha
      * @param regexp a filter for file names to return
      * @return the paths of the files modifies in the commit, after the regexp filter is applied
      */
     Set<String> getModifiedFiles(String sha, String regexp);
+
+    /**
+     * @param newSha the old sha
+     * @param oldSha the new sha
+     * @param regexp a filter for file
+     * @return the diff between two commits
+     */
+    Changes getChanges(String oldSha, String newSha, String regexp);
 
     /**
      * @return the path to the Git repository

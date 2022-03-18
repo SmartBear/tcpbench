@@ -1,34 +1,47 @@
 package com.smartbear.tcpbench.rtptorrent;
 
+import com.smartbear.tcpbench.Changes;
 import com.smartbear.tcpbench.Query;
 import com.smartbear.tcpbench.Verdict;
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.diff.DiffEntry;
+import org.eclipse.jgit.diff.DiffFormatter;
+import org.eclipse.jgit.diff.Edit;
+import org.eclipse.jgit.diff.RawTextComparator;
+import org.eclipse.jgit.internal.storage.file.FileRepository;
+import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.revwalk.RevWalk;
+import org.eclipse.jgit.util.io.DisabledOutputStream;
 import tech.tablesaw.api.ColumnType;
 import tech.tablesaw.api.StringColumn;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.io.csv.CsvReadOptions;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-import static tech.tablesaw.api.ColumnType.DOUBLE;
-import static tech.tablesaw.api.ColumnType.INTEGER;
-import static tech.tablesaw.api.ColumnType.STRING;
+import static java.util.stream.Collectors.toList;
+import static tech.tablesaw.api.ColumnType.*;
 
 public class RtpTorrentQuery implements Query {
+
     private final Table testsTable;
     private final Table commitsTable;
     private final Table patchesTable;
+    private final Git git;
     private final File repository;
 
-    private RtpTorrentQuery(Table testsTable, Table commitsTable, Table patchesTable, File repository) {
+    private RtpTorrentQuery(Table testsTable, Table commitsTable, Table patchesTable, Git git) {
         this.testsTable = testsTable;
         this.commitsTable = commitsTable;
         this.patchesTable = patchesTable;
-        this.repository = repository;
+        this.git = git;
+        this.repository = git.getRepository().getDirectory();
     }
 
     public static Query create(File rtpTorrentProjectDir) throws Exception {
@@ -44,8 +57,8 @@ public class RtpTorrentQuery implements Query {
                 STRING, STRING
         }));
         File repository = new File(new File(rtpTorrentProjectDir.getParentFile(), "repo"), projectName);
-
-        return new RtpTorrentQuery(testsTable, commitsTable, patchesTable, repository);
+        Git git = Git.wrap(new FileRepository(repository));
+        return new RtpTorrentQuery(testsTable, commitsTable, patchesTable, git);
     }
 
     @Override
@@ -67,7 +80,7 @@ public class RtpTorrentQuery implements Query {
                         testCase.getInt("failures") > 0,
                         testCase.getInt("count"),
                         Duration.ofMillis((long) (testCase.getDouble("duration") * 1000)))
-                ).collect(Collectors.toList());
+                ).collect(toList());
     }
 
     @Override
@@ -84,6 +97,38 @@ public class RtpTorrentQuery implements Query {
         StringColumn nameColumn = patchesTable.stringColumn("name");
         Table patches = patchesTable.where(shaColumn.isEqualTo(sha).and(nameColumn.matchesRegex(regexp)));
         return patches.stringColumn("name").asSet();
+    }
+
+    @Override
+    public Changes getChanges(String oldSha, String newSha, String regexp) {
+        ObjectId oldCommitId = ObjectId.fromString(oldSha);
+        ObjectId newCommitId = ObjectId.fromString(newSha);
+        DiffFormatter diffFormatter = new DiffFormatter(DisabledOutputStream.INSTANCE);
+        diffFormatter.setRepository(git.getRepository());
+        diffFormatter.setDiffComparator(RawTextComparator.DEFAULT);
+        int linesAdded = 0;
+        int linesDeleted = 0;
+        int timeDiff = 0;
+        int changedFiles = 0;
+        try (RevWalk revWalk = new RevWalk(git.getRepository())) {
+            RevCommit oldCommit = revWalk.parseCommit(git.getRepository().resolve(oldSha));
+            RevCommit newCommit = revWalk.parseCommit(git.getRepository().resolve(newSha));
+            timeDiff = newCommit.getCommitTime() - oldCommit.getCommitTime();
+            List<DiffEntry> diffEntries;
+            diffEntries = diffFormatter.scan(oldCommitId, newCommitId).stream().filter(diffEntry -> diffEntry.getNewPath().matches(regexp) || diffEntry.getOldPath().matches(regexp)).collect(toList());
+            changedFiles = diffEntries.size();
+            for (DiffEntry diffEntry : diffEntries) {
+                for (Edit edit : diffFormatter.toFileHeader(diffEntry).toEditList()) {
+                    if (edit.getType() != Edit.Type.REPLACE) {
+                        linesDeleted += edit.getEndA() - edit.getBeginA();
+                        linesAdded += edit.getEndB() - edit.getBeginB();
+                    }
+                }
+            }
+            return new Changes(changedFiles, linesAdded, linesDeleted, timeDiff);
+        } catch (IOException e) {
+            return new Changes();
+        }
     }
 
     @Override
