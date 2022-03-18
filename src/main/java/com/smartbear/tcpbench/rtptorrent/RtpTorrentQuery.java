@@ -8,6 +8,7 @@ import org.eclipse.jgit.diff.DiffEntry;
 import org.eclipse.jgit.diff.DiffFormatter;
 import org.eclipse.jgit.diff.Edit;
 import org.eclipse.jgit.diff.RawTextComparator;
+import org.eclipse.jgit.errors.AmbiguousObjectException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -126,8 +127,11 @@ public class RtpTorrentQuery implements Query {
                 }
             }
             return new Changes(changedFiles, linesAdded, linesDeleted, timeDiff);
-        } catch (IOException e) {
+        } catch (AmbiguousObjectException e) {
+            // unable to find commit
             return new Changes();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
