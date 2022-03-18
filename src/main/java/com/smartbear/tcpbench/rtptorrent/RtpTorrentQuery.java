@@ -120,10 +120,8 @@ public class RtpTorrentQuery implements Query {
             changedFiles = diffEntries.size();
             for (DiffEntry diffEntry : diffEntries) {
                 for (Edit edit : diffFormatter.toFileHeader(diffEntry).toEditList()) {
-                    if (edit.getType() != Edit.Type.REPLACE) {
-                        linesDeleted += edit.getEndA() - edit.getBeginA();
-                        linesAdded += edit.getEndB() - edit.getBeginB();
-                    }
+                    linesDeleted += edit.getEndA() - edit.getBeginA();
+                    linesAdded += edit.getEndB() - edit.getBeginB();
                 }
             }
             return new Changes(changedFiles, linesAdded, linesDeleted, timeDiff);
