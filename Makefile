@@ -1,5 +1,5 @@
-ifndef TCP_TORRENT
-$(error TCP_TORRENT is not set)
+ifndef RTP_TORRENT
+$(error RTP_TORRENT is not set)
 endif
 
 JAVA_FILES = $(shell find src/main -name "*.java")
@@ -28,7 +28,7 @@ svgs: results/rtptorrent/CloudifySource@cloudify.svg \
 results/rtptorrent/%.csv: scripts/tcpbench.sh target/tcpbench-0.0.1-SNAPSHOT.jar
 	mkdir -p $(@D)
 	$< \
-		--rtptorrent $(TCP_TORRENT)/$$(basename $(@D)) \
+		--rtptorrent $(RTP_TORRENT)/$$(basename $(@D)) \
 		--engine $$(basename $@ .csv) \
 		--training 10 \
 		--prediction 30 \
