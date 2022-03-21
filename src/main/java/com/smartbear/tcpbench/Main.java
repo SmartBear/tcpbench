@@ -54,6 +54,11 @@ public class Main {
             List<Verdict> verdicts = query.getVerdicts(testCycleId);
             tcpEngine.defineTestCycle(testCycleId, verdicts, query);
 
+//            List<String> shas = query.getOrderedShas(testCycleId);
+//            if(!shas.isEmpty()) {
+//                query.getChanges(shas, ".*");
+//            }
+
             if (verdicts.size() >= MIN_TEST_CASE_COUNT_FOR_PRIORITIZATION && testCycleIndex >= trainingCount) {
                 List<String> ordering = tcpEngine.getOrdering(testCycleId);
                 if (ordering != null) {

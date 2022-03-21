@@ -11,9 +11,14 @@ import com.smartesting.comet.api.ProjectsApi;
 import com.smartesting.comet.api.TestCyclesApi;
 import com.smartesting.comet.api.TestsApi;
 import com.smartesting.comet.auth.ApiKeyAuth;
-import com.smartesting.comet.model.*;
+import com.smartesting.comet.model.Prioritization;
+import com.smartesting.comet.model.Project;
+import com.smartesting.comet.model.Test;
+import com.smartesting.comet.model.TestCycle;
+import com.smartesting.comet.model.TestVerdict;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.smartbear.tcpbench.Env.getEnv;
@@ -47,13 +52,10 @@ public class Comet implements TcpEngine {
 
     @Override
     public void defineTestCycle(String testCycleId, List<Verdict> verdicts, Query query) {
-        List<String> shas = query.getShas(testCycleId);
+        List<String> shas = query.getOrderedShas(testCycleId);
         Changes changes = new Changes();
-        if (shas.size() > 0) {
-            if (previousSha != null) {
-                changes = query.getChanges(previousSha, shas.get(0), ".*.java$");
-            }
-            previousSha = shas.get(0);
+        if (!shas.isEmpty()) {
+            changes = query.getChanges(shas, ".*.java$");
         }
         List<Test> tests = verdicts.stream().map(verdict -> new Test().id(verdict.getTestId())).collect(Collectors.toList());
         TestCycle cycle = new TestCycle()

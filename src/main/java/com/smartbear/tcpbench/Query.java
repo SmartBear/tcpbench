@@ -2,7 +2,6 @@ package com.smartbear.tcpbench;
 
 import java.io.File;
 import java.util.List;
-import java.util.Set;
 
 public interface Query {
     /**
@@ -17,29 +16,25 @@ public interface Query {
     List<Verdict> getVerdicts(String testCycleId);
 
     /**
-     * Get the git shas of a test cycle. Intuitively there should be one and only
-     * one git sha per test cycle. However, the RTPTorrent data set sometimes
-     * contains zero, two or more shas for the same test cycle.
+     * Get the git ordered SHAs of a test cycle. This list may be empty.
+     * If the list is not empty, it has 2 or more SHAs. The first one is
+     * the *parent commit* of the *first* SHA in the test cycle. The last one
+     * is the *last* SHA in the test cycle.
+     *
+     * The first and last SHA can be used to compute the diff that went into this
+     * test cycle.
      *
      * @param testCycleId the test cycle id
      * @return the git shas of the test cycle
      */
-    List<String> getShas(String testCycleId);
+    List<String> getOrderedShas(String testCycleId);
 
     /**
-     * @param sha    a git sha
-     * @param regexp a filter for file names to return
-     * @return the paths of the files modifies in the commit, after the regexp filter is applied
-     */
-    Set<String> getModifiedFiles(String sha, String regexp);
-
-    /**
-     * @param newSha the old sha
-     * @param oldSha the new sha
+     * @param orderedShas a set of shas
      * @param regexp a filter for file
      * @return the diff between two commits
      */
-    Changes getChanges(String oldSha, String newSha, String regexp);
+    Changes getChanges(List<String> orderedShas, String regexp);
 
     /**
      * @return the path to the Git repository

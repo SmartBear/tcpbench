@@ -7,10 +7,7 @@ public class Changes {
     private final int timeDiff;
 
     public Changes() {
-        this.changedFiles = 0;
-        this.linesAdded = 0;
-        this.linesDeleted = 0;
-        this.timeDiff = 0;
+        this(0, 0, 0, 0);
     }
 
     public Changes(int changedFiles, int linesAdded, int linesDeleted, int timeDiff) {
@@ -34,5 +31,15 @@ public class Changes {
 
     public int getTimeDiff() {
         return timeDiff;
+    }
+
+    @Override
+    public String toString() {
+        return "Changes{" +
+                "changedFiles=" + changedFiles +
+                ", linesAdded=" + linesAdded +
+                ", linesDeleted=" + linesDeleted +
+                ", timeDiff=" + timeDiff +
+                '}';
     }
 }

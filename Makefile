@@ -25,9 +25,9 @@ svgs: results/rtptorrent/CloudifySource@cloudify.svg \
       results/rtptorrent/square@okhttp.svg \
       results/rtptorrent/thinkaurelius@titan.svg
 
-results/rtptorrent/%.csv: target/tcpbench.jar
+results/rtptorrent/%.csv: scripts/tcpbench.sh target/tcpbench-0.0.1-SNAPSHOT.jar
 	mkdir -p $(@D)
-	java -jar $< \
+	$< \
 		--rtptorrent $(TCP_TORRENT)/$$(basename $(@D)) \
 		--engine $$(basename $@ .csv) \
 		--training 10 \
@@ -44,5 +44,5 @@ results/rtptorrent/%.svg: scripts/boxplot.plg \
 
 	gnuplot -e "filenames='$(wordlist 2, $(words $^), $^)'" $< > $@
 
-target/tcpbench.jar: $(JAVA_FILES) pom.xml
+target/tcpbench-0.0.1-SNAPSHOT.jar: $(JAVA_FILES) pom.xml
 	mvn package
