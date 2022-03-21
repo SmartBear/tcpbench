@@ -17,7 +17,7 @@ jobs:
           java-version: '16'
           cache: 'maven'
       - name: Download RTPTorrent
-      - run: |
+        run: |
           wget https://zenodo.org/record/4046180/files/rtp-torrent-v11.zip?download=1
           unzip rtp-torrent-v11.zip
       - name: Sanity check
