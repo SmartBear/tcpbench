@@ -18,7 +18,7 @@ jobs:
           cache: 'maven'
       - name: Download RTPTorrent
         run: |
-          wget https://zenodo.org/record/4046180/files/rtp-torrent-v11.zip?download=1
+          curl --progress-bar https://zenodo.org/record/4046180/files/rtp-torrent-v11.zip?download=1 > rtp-torrent-v11.zip
           unzip rtp-torrent-v11.zip
       - name: Sanity check
         run: make results/rtptorrent/CloudifySource@cloudify/com.smartbear.tcpbench.engines.InitialOrder.csv
