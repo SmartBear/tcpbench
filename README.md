@@ -1,3 +1,5 @@
+[![test-java](https://github.com/SmartBear/tcpbench/actions/workflows/test.yaml/badge.svg)](https://github.com/SmartBear/tcpbench/actions/workflows/test.yaml)
+
 # Test Case Prioritization (TCP) Benchmark
 
 A command-line utility that calculates the [APFD] score for different Test Case Prioritization algorithms and
