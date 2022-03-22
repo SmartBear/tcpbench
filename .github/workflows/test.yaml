@@ -16,11 +16,23 @@ jobs:
           distribution: 'temurin'
           java-version: '16'
           cache: 'maven'
+      - name: Cache RTPTorrent
+        id: cache-rtptorrent
+        uses: actions/cache@v3
+        with:
+          path: ~/rtp-torrent
+          key: ${{ runner.os }}-rtp-torrent
       - name: Download RTPTorrent
+        if: steps.cache-rtptorrent.outputs.cache-hit != 'true'
         run: |
+          cd ~
           curl --progress-bar https://zenodo.org/record/4046180/files/rtp-torrent-v11.zip?download=1 > rtp-torrent-v11.zip
           unzip rtp-torrent-v11.zip
-      - name: Sanity check
+      - name: Clone Comet Client
+        run: git clone https://bitbucket.org/smartesting/comet-clients.git
+      - name: Build Comet Client
+        run: cd comet-clients/java/comet-javaclient/ && mvn install
+      - name: Sanity Check
         run: make results/rtptorrent/CloudifySource@cloudify/com.smartbear.tcpbench.engines.InitialOrder.csv
         env:
           RTP_TORRENT: rtp-torrent
