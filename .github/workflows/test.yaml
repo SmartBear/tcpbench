@@ -35,4 +35,4 @@ jobs:
       - name: Sanity Check
         run: make results/rtptorrent/CloudifySource@cloudify/com.smartbear.tcpbench.engines.InitialOrder.csv
         env:
-          RTP_TORRENT: rtp-torrent
+          RTP_TORRENT: ~/rtp-torrent
