@@ -11,7 +11,6 @@ public interface TcpEngine {
      * @param testCycleId the test cycle ID
      * @param verdicts    the actual test results
      * @param query       an object to extract additional information, if necessary
-     * @throws Exception if anything went wrong
      */
     void defineTestCycle(String testCycleId, List<Verdict> verdicts, Query query);
 
@@ -20,7 +19,6 @@ public interface TcpEngine {
      *
      * @param testCycleId the test cycle ID
      * @return the ordered test IDs for the test cycle, or null if no ordering could be determined
-     * @throws Exception if anything went wrong
      */
     List<String> getOrdering(String testCycleId);
 
@@ -29,7 +27,6 @@ public interface TcpEngine {
      *
      * @param testCycleId the test cycle ID
      * @param verdicts    the actual test results
-     * @throws Exception if anything went wrong
      */
     void train(String testCycleId, List<Verdict> verdicts);
 }
