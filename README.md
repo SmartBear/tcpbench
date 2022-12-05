@@ -16,6 +16,7 @@ In order to generate the box plot metrics you need:
 * Gnuplot
 * Maven
 * A Comet API key (optional)
+* A build of SmartBear's TCP engine (optional)
 
 ## Usage
 
@@ -27,6 +28,10 @@ Define Comet environment variables (optional)
 
     export COMET_URL=https://chiron.comet.smartesting.com
     export COMET_API_KEY=...
+
+Define SmartBear TCP environment variables (optional)
+
+    export SMARTBEAR_TCP_DIR=...
 
 Generate the metrics:
 
@@ -72,6 +77,8 @@ Command line options:
 * `--prediction` - the number of test cycles we want to generate predictions for
 * `--rtptorrent` - the path to the RTPTorrent project directory
 * `--engine` - the name of the class interacting with the TCP engine (`implements com.smartbear.tcpbench.TcpEngine`)
+
+Once all the APFD CSVs have been generated, a box plot is generated for each project, comparing the APFD of each algorithm.
 
 ## Adding new TCP algorithm
 

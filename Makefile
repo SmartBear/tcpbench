@@ -41,7 +41,8 @@ results/rtptorrent/%.svg: scripts/boxplot.plg \
       results/rtptorrent/%/com.smartbear.tcpbench.engines.OriginalOrder.csv \
       results/rtptorrent/%/com.smartbear.tcpbench.engines.RandomOrder.csv \
       results/rtptorrent/%/com.smartbear.tcpbench.engines.FailureFrequencyOrder.csv \
-      $(if $(COMET_URL), results/rtptorrent/%/com.smartbear.tcpbench.engines.Comet.csv)
+      $(if $(COMET_URL), results/rtptorrent/%/com.smartbear.tcpbench.engines.Comet.csv) \
+      $(if $(SMARTBEAR_TCP_DIR), results/rtptorrent/%/com.smartbear.tcpbench.engines.SmartBearOrder.csv) \
 
 	gnuplot -e "filenames='$(wordlist 2, $(words $^), $^)'" $< > $@
 
