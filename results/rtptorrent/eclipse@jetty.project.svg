@@ -7,7 +7,7 @@
 >
 
 <title>Gnuplot</title>
-<desc>Produced by GNUPLOT 5.4 patchlevel 3 </desc>
+<desc>Produced by GNUPLOT 5.4 patchlevel 5 </desc>
 
 <g id="gnuplot_canvas">
 
@@ -103,7 +103,7 @@
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<path stroke='black'  d='M362.15,564.00  '/>	<g transform="translate(362.15,585.90)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Arial" >InitialOrder</tspan></text>
+		<text><tspan font-family="Arial" >OriginalOrder</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -113,7 +113,7 @@
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<path stroke='black'  d='M662.27,564.00  '/>	<g transform="translate(662.27,585.90)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Arial" >Comet</tspan></text>
+		<text><tspan font-family="Arial" >FailureFrequencyOrder</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -160,10 +160,12 @@
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g stroke='none' shape-rendering='crispEdges'>
-		<polygon fill = 'rgb(230, 159,   0)' fill-opacity = '0.250000' points = '609.75,217.11 714.81,217.11 714.81,65.50 609.75,65.50 '/>
+		<polygon fill = 'rgb(230, 159,   0)' fill-opacity = '0.250000' points = '609.75,65.50 714.81,65.50 714.81,56.39 609.75,56.39 '/>
 	</g>
-	<path stroke='black'  d='M609.75,217.11 L714.81,217.11 L714.81,65.50 L609.75,65.50 L609.75,217.11 Z  '/>	<path stroke='black'  d='M609.75,93.06 L714.81,93.06 M662.28,415.86 L662.28,217.11 M662.28,65.50 L662.28,56.39 M653.28,56.39 L671.28,56.39
-		M653.28,415.86 L671.28,415.86  '/>	<use xlink:href='#gpPt6' transform='translate(662.27,509.36) scale(4.50)' color='black'/>
+	<path stroke='black'  d='M609.75,65.50 L714.81,65.50 L714.81,56.39 L609.75,56.39 L609.75,65.50 Z  '/>	<path stroke='black'  d='M609.75,56.44 L714.81,56.44 M662.28,74.69 L662.28,65.50 M662.28,56.39 L662.28,56.31 M653.28,56.31 L671.28,56.31
+		M653.28,74.69 L671.28,74.69  '/>	<use xlink:href='#gpPt6' transform='translate(662.27,79.28) scale(4.50)' color='black'/>
+	<use xlink:href='#gpPt6' transform='translate(644.27,79.28) scale(4.50)' color='black'/>
+	<use xlink:href='#gpPt6' transform='translate(680.27,79.28) scale(4.50)' color='black'/>
 </g>
 	</g>
 <g fill="none" color="white" stroke="black" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">

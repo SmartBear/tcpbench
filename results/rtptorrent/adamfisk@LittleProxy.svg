@@ -7,7 +7,7 @@
 >
 
 <title>Gnuplot</title>
-<desc>Produced by GNUPLOT 5.4 patchlevel 3 </desc>
+<desc>Produced by GNUPLOT 5.4 patchlevel 5 </desc>
 
 <g id="gnuplot_canvas">
 
@@ -103,7 +103,7 @@
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<path stroke='black'  d='M362.15,564.00  '/>	<g transform="translate(362.15,585.90)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Arial" >InitialOrder</tspan></text>
+		<text><tspan font-family="Arial" >OriginalOrder</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -113,7 +113,7 @@
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<path stroke='black'  d='M662.27,564.00  '/>	<g transform="translate(662.27,585.90)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Arial" >Comet</tspan></text>
+		<text><tspan font-family="Arial" >FailureFrequencyOrder</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -166,10 +166,10 @@
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g stroke='none' shape-rendering='crispEdges'>
-		<polygon fill = 'rgb(230, 159,   0)' fill-opacity = '0.250000' points = '609.75,292.55 714.81,292.55 714.81,98.63 609.75,98.63 '/>
+		<polygon fill = 'rgb(230, 159,   0)' fill-opacity = '0.250000' points = '609.75,144.49 714.81,144.49 714.81,69.01 609.75,69.01 '/>
 	</g>
-	<path stroke='black'  d='M609.75,292.55 L714.81,292.55 L714.81,98.63 L609.75,98.63 L609.75,292.55 Z  '/>	<path stroke='black'  d='M609.75,221.93 L714.81,221.93 M662.28,506.63 L662.28,292.55 M662.28,98.63 L662.28,68.18 M653.28,68.18 L671.28,68.18
-		M653.28,506.63 L671.28,506.63  '/></g>
+	<path stroke='black'  d='M609.75,144.49 L714.81,144.49 L714.81,69.01 L609.75,69.01 L609.75,144.49 Z  '/>	<path stroke='black'  d='M609.75,96.51 L714.81,96.51 M662.28,209.84 L662.28,144.49 M662.28,69.01 L662.28,60.23 M653.28,60.23 L671.28,60.23
+		M653.28,209.84 L671.28,209.84  '/></g>
 	</g>
 <g fill="none" color="white" stroke="black" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>

@@ -3,16 +3,26 @@ package com.smartbear.tcpbench;
 import java.util.List;
 
 public interface TcpEngine {
-    void prepare(String projectName) throws Exception;
+    /**
+     * Create a new project. A typical implementation would perform the following operations:
+     *
+     * <ul>
+     * <li>Delete the old project if it exists</li>
+     * <li>(Re)create the project</li>
+     * </ul>
+     *
+     * @param projectName the name of the project
+     * @throws Exception if something went wrong
+     */
+    void createProject(String projectName) throws Exception;
 
     /**
-     * Define a test cycle
+     * Train the engine. A typical implementation would
      *
      * @param testCycleId the test cycle ID
      * @param verdicts    the actual test results
-     * @param query       an object to extract additional information, if necessary
      */
-    void defineTestCycle(String testCycleId, List<Verdict> verdicts, Query query);
+    void train(String testCycleId, List<Verdict> verdicts, Query query);
 
     /**
      * Perform a tcp opertation
@@ -22,11 +32,4 @@ public interface TcpEngine {
      */
     List<String> getOrdering(String testCycleId);
 
-    /**
-     * Train the engine
-     *
-     * @param testCycleId the test cycle ID
-     * @param verdicts    the actual test results
-     */
-    void train(String testCycleId, List<Verdict> verdicts);
 }

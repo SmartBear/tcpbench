@@ -43,7 +43,7 @@ public class Main {
         TcpEngine tcpEngine = (TcpEngine) Main.class.getClassLoader().loadClass(engineClass).getConstructor().newInstance();
         Query query = RtpTorrentQuery.create(rtpTorrentProjectDir);
 
-        tcpEngine.prepare(projectName);
+        tcpEngine.createProject(projectName);
 
         List<String> testCycleIds = query.getOrderedFailingTestCycleIds();
         int cycleCount = Math.min(trainingCount + predictionCount, testCycleIds.size());
@@ -52,12 +52,7 @@ public class Main {
         testCycleIndexes.forEach((testCycleIndex) -> {
             String testCycleId = testCycleIds.get(testCycleIndex);
             List<Verdict> verdicts = query.getVerdicts(testCycleId);
-            tcpEngine.defineTestCycle(testCycleId, verdicts, query);
-
-//            List<String> shas = query.getOrderedShas(testCycleId);
-//            if(!shas.isEmpty()) {
-//                query.getChanges(shas, ".*");
-//            }
+            tcpEngine.train(testCycleId, verdicts, query);
 
             if (verdicts.size() >= MIN_TEST_CASE_COUNT_FOR_PRIORITIZATION && testCycleIndex >= trainingCount) {
                 List<String> ordering = tcpEngine.getOrdering(testCycleId);
@@ -67,8 +62,6 @@ public class Main {
                     System.out.println(apfd);
                 }
             }
-
-            tcpEngine.train(testCycleId, verdicts);
         });
     }
 }

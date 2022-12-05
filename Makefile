@@ -38,8 +38,9 @@ results/rtptorrent/%.csv: scripts/tcpbench.sh target/tcpbench-0.0.1-SNAPSHOT.jar
 
 results/rtptorrent/%.svg: scripts/boxplot.plg \
       results/rtptorrent/%/com.smartbear.tcpbench.engines.OptimalOrder.csv \
-      results/rtptorrent/%/com.smartbear.tcpbench.engines.InitialOrder.csv \
+      results/rtptorrent/%/com.smartbear.tcpbench.engines.OriginalOrder.csv \
       results/rtptorrent/%/com.smartbear.tcpbench.engines.RandomOrder.csv \
+      results/rtptorrent/%/com.smartbear.tcpbench.engines.FailureFrequencyOrder.csv \
       $(if $(COMET_URL), results/rtptorrent/%/com.smartbear.tcpbench.engines.Comet.csv)
 
 	gnuplot -e "filenames='$(wordlist 2, $(words $^), $^)'" $< > $@

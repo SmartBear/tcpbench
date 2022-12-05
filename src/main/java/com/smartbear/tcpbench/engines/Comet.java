@@ -18,7 +18,6 @@ import com.smartesting.comet.model.TestCycle;
 import com.smartesting.comet.model.TestVerdict;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.smartbear.tcpbench.Env.getEnv;
@@ -27,7 +26,6 @@ import static com.smartesting.comet.Configuration.getDefaultApiClient;
 public class Comet implements TcpEngine {
     private final ApiClient client;
     private String projectName;
-    private String previousSha;
 
     public Comet() {
         client = getDefaultApiClient();
@@ -38,7 +36,7 @@ public class Comet implements TcpEngine {
     }
 
     @Override
-    public void prepare(String projectName) throws ApiException {
+    public void createProject(String projectName) throws ApiException {
         this.projectName = projectName;
         ProjectsApi projectsApi = new ProjectsApi(client);
 
@@ -51,7 +49,21 @@ public class Comet implements TcpEngine {
     }
 
     @Override
-    public void defineTestCycle(String testCycleId, List<Verdict> verdicts, Query query) {
+    public void train(String testCycleId, List<Verdict> verdicts, Query query) {
+        TestsApi testsApi = new TestsApi(client);
+        List<TestVerdict> testVerdicts = verdicts.stream()
+                .map(verdict -> new TestVerdict()
+                        .id(verdict.getTestId())
+                        .methodsNumber(verdict.getCount())
+                        .duration(verdict.getDuration().toMillis() * 1000f)
+                        .fail(verdict.isFailure()))
+                .collect(Collectors.toList());
+        try {
+            testsApi.updateSuite(projectName, String.valueOf(testCycleId), testVerdicts);
+        } catch (ApiException e) {
+            throw new RuntimeException(e);
+        }
+
         List<String> shas = query.getOrderedShas(testCycleId);
         Changes changes = new Changes();
         if (!shas.isEmpty()) {
@@ -85,22 +97,4 @@ public class Comet implements TcpEngine {
             throw new RuntimeException(e);
         }
     }
-
-    @Override
-    public void train(String testCycleId, List<Verdict> verdicts) {
-        TestsApi testsApi = new TestsApi(client);
-        List<TestVerdict> testVerdicts = verdicts.stream()
-                .map(verdict -> new TestVerdict()
-                        .id(verdict.getTestId())
-                        .methodsNumber(verdict.getCount())
-                        .duration(verdict.getDuration().toMillis() * 1000f)
-                        .fail(verdict.isFailure()))
-                .collect(Collectors.toList());
-        try {
-            testsApi.updateSuite(projectName, String.valueOf(testCycleId), testVerdicts);
-        } catch (ApiException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 }

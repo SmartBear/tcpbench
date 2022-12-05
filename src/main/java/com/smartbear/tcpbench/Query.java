@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface Query {
     /**
-     * @return all test cycles, chronologically ordered
+     * @return all failing test cycles, chronologically ordered
      */
     List<String> getOrderedFailingTestCycleIds();
 
