@@ -3,7 +3,10 @@ package com.smartbear.tcpbench;
 import java.io.File;
 import java.util.List;
 
-public interface Query {
+/**
+ * An abstraction of historical test results (verdicts) and changesets
+ */
+public interface History {
     /**
      * @return all failing test cycles, chronologically ordered
      */
@@ -17,7 +20,7 @@ public interface Query {
 
     /**
      * Get the git ordered SHAs of a test cycle. This list may be empty.
-     * If the list is not empty, it has 2 or more SHAs. The first one is
+     * If the list is not empty, it must have 2 or more SHAs. The first one is
      * the *parent commit* of the *first* SHA in the test cycle. The last one
      * is the *last* SHA in the test cycle.
      *

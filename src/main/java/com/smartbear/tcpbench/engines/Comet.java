@@ -1,7 +1,7 @@
 package com.smartbear.tcpbench.engines;
 
 import com.smartbear.tcpbench.Changes;
-import com.smartbear.tcpbench.Query;
+import com.smartbear.tcpbench.History;
 import com.smartbear.tcpbench.TcpEngine;
 import com.smartbear.tcpbench.Verdict;
 import com.smartesting.comet.ApiClient;
@@ -49,7 +49,7 @@ public class Comet implements TcpEngine {
     }
 
     @Override
-    public void train(String testCycleId, List<Verdict> verdicts, Query query) {
+    public void train(String testCycleId, List<Verdict> verdicts, History history) {
         TestsApi testsApi = new TestsApi(client);
         List<TestVerdict> testVerdicts = verdicts.stream()
                 .map(verdict -> new TestVerdict()
@@ -64,10 +64,10 @@ public class Comet implements TcpEngine {
             throw new RuntimeException(e);
         }
 
-        List<String> shas = query.getOrderedShas(testCycleId);
+        List<String> shas = history.getOrderedShas(testCycleId);
         Changes changes = new Changes();
         if (!shas.isEmpty()) {
-            changes = query.getChanges(shas, ".*.java$");
+            changes = history.getChanges(shas, ".*.java$");
         }
         List<Test> tests = verdicts.stream().map(verdict -> new Test().id(verdict.getTestId())).collect(Collectors.toList());
         TestCycle cycle = new TestCycle()

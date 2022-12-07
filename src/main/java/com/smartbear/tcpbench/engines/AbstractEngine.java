@@ -1,6 +1,6 @@
 package com.smartbear.tcpbench.engines;
 
-import com.smartbear.tcpbench.Query;
+import com.smartbear.tcpbench.History;
 import com.smartbear.tcpbench.TcpEngine;
 import com.smartbear.tcpbench.Verdict;
 
@@ -16,7 +16,7 @@ public abstract class AbstractEngine implements TcpEngine {
     }
 
     @Override
-    public void train(String testCycleId, List<Verdict> verdicts, Query query) {
+    public void train(String testCycleId, List<Verdict> verdicts, History history) {
         verdictsByTestCycleId.put(testCycleId, verdicts);
     }
 

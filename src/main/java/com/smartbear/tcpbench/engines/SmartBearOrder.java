@@ -2,7 +2,7 @@ package com.smartbear.tcpbench.engines;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.smartbear.tcpbench.Query;
+import com.smartbear.tcpbench.History;
 import com.smartbear.tcpbench.Verdict;
 
 import java.io.BufferedReader;
@@ -60,9 +60,9 @@ public class SmartBearOrder extends AbstractEngine {
     }
 
     @Override
-    public void train(String testCycleId, List<Verdict> verdicts, Query query) {
-        super.train(testCycleId, verdicts, query);
-        List<String> shas = query.getOrderedShas(testCycleId);
+    public void train(String testCycleId, List<Verdict> verdicts, History history) {
+        super.train(testCycleId, verdicts, history);
+        List<String> shas = history.getOrderedShas(testCycleId);
         if (shas.isEmpty()) {
             System.err.printf("No git shas for testCycleId %s. TCP will only use priors\n", testCycleId);
             return;
@@ -71,7 +71,7 @@ public class SmartBearOrder extends AbstractEngine {
         String oldSha = shas.get(0);
         String newSha = shas.get(shas.size() - 1);
         try {
-            File changesetFile = buildChangeset(oldSha, newSha, query.getRepository());
+            File changesetFile = buildChangeset(oldSha, newSha, history.getRepository());
             changesetFileByTestCycleId.put(testCycleId, changesetFile);
             shaByTestCycleId.put(testCycleId, newSha);
         } catch (Exception e) {

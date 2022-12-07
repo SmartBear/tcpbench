@@ -1,7 +1,7 @@
 package com.smartbear.tcpbench.rtptorrent;
 
 import com.smartbear.tcpbench.Changes;
-import com.smartbear.tcpbench.Query;
+import com.smartbear.tcpbench.History;
 import com.smartbear.tcpbench.Verdict;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.diff.DiffEntry;
@@ -33,19 +33,19 @@ import static tech.tablesaw.api.ColumnType.DOUBLE;
 import static tech.tablesaw.api.ColumnType.INTEGER;
 import static tech.tablesaw.api.ColumnType.STRING;
 
-public class RtpTorrentQuery implements Query {
+public class RtpTorrentHistory implements History {
 
     private final Table testsTable;
     private final Table commitsTable;
     private final Repository repository;
 
-    private RtpTorrentQuery(Table testsTable, Table commitsTable, Repository repository) {
+    private RtpTorrentHistory(Table testsTable, Table commitsTable, Repository repository) {
         this.testsTable = testsTable;
         this.commitsTable = commitsTable;
         this.repository = repository;
     }
 
-    public static Query create(File rtpTorrentProjectDir) throws Exception {
+    public static History create(File rtpTorrentProjectDir) throws Exception {
         String projectName = rtpTorrentProjectDir.getName();
 
         Table testsTable = Table.read().usingOptions(CsvReadOptions.builder(new File(rtpTorrentProjectDir, projectName + ".csv")).columnTypes(new ColumnType[]{
@@ -56,7 +56,7 @@ public class RtpTorrentQuery implements Query {
         }));
         File repository = new File(new File(rtpTorrentProjectDir.getParentFile(), "repo"), projectName);
         Git git = Git.wrap(new FileRepository(repository));
-        return new RtpTorrentQuery(testsTable, commitsTable, git.getRepository());
+        return new RtpTorrentHistory(testsTable, commitsTable, git.getRepository());
     }
 
     @Override

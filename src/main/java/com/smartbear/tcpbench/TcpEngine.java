@@ -21,9 +21,9 @@ public interface TcpEngine {
      *
      * @param testCycleId the test cycle ID
      * @param verdicts    the actual test results
-     * @param query       an object that provides access to additional information if the TCP algorithm needs it
+     * @param history       an object that provides access to additional information if the TCP algorithm needs it
      */
-    void train(String testCycleId, List<Verdict> verdicts, Query query);
+    void train(String testCycleId, List<Verdict> verdicts, History history);
 
     /**
      * Requests a TCP ordering
