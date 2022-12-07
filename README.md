@@ -18,9 +18,7 @@ Let `T` be a test suite containing `n` test cases, out of which `m` are failing.
 Let `TFi` be the index of the `i`th failing test on ordering `T′` of `T`.
 The APTF of test suite `T′` is given by the equation:
 
-```math
-APTF = 1 - {\sum_{i=1}^m TF_i \over nm} + {1 \over 2n}
-```
+$$APTF = 1 - {\sum_{i=1}^m TF_i \over nm} + {1 \over 2n}$$
 
 High values indicate that the test failures occur early in the testing process while low values indicate the test failures occur later. 
 Notice that the APTF metric is equivalent to the APFD metric in the case where each test reveals one different fault.
