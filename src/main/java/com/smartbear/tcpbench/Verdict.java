@@ -5,13 +5,11 @@ import java.time.Duration;
 public class Verdict {
     private final String testId;
     private final boolean failure;
-    private final int count;
     private final Duration duration;
 
-    public Verdict(String testId, boolean failure, int count, Duration duration) {
+    public Verdict(String testId, boolean failure, Duration duration) {
         this.testId = testId;
         this.failure = failure;
-        this.count = count;
         this.duration = duration;
     }
 
@@ -21,10 +19,6 @@ public class Verdict {
 
     public boolean isFailure() {
         return failure;
-    }
-
-    public int getCount() {
-        return count;
     }
 
     public Duration getDuration() {

@@ -76,7 +76,6 @@ public class RtpTorrentHistory implements History {
                 .map(testCase -> new Verdict(
                         testCase.getString("testName"),
                         testCase.getInt("failures") > 0,
-                        testCase.getInt("count"),
                         Duration.ofMillis((long) (testCase.getDouble("duration") * 1000)))
                 ).collect(toList());
     }
@@ -85,7 +84,7 @@ public class RtpTorrentHistory implements History {
     public List<String> getOrderedShas(String testCycleId) {
         Table commits = commitsTable.where(commitsTable.stringColumn("tr_job_id").isEqualTo(testCycleId));
         // RTPTorrent sometimes links more than one commit to the same job. This happens if multiple commits went into
-        // a "push" that triggered the build. We need to order those shas so we know which one is the oldest and the newest.
+        // a "push" that triggered the build. We need to order those shas, so we know which one is the oldest and the newest.
         // The returned list also contains the parent of the oldest SHA from the dataset, which can be used to create a diff.
         Set<String> shas = commits.stringColumn("git_commit_id").asSet();
 
