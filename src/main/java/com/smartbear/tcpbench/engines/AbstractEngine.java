@@ -2,25 +2,19 @@ package com.smartbear.tcpbench.engines;
 
 import com.smartbear.tcpbench.History;
 import com.smartbear.tcpbench.TcpEngine;
+import com.smartbear.tcpbench.TestCycle;
 import com.smartbear.tcpbench.Verdict;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public abstract class AbstractEngine implements TcpEngine {
-    private final Map<String, List<Verdict>> verdictsByTestCycleId = new HashMap<>();
-
     @Override
-    public void createProject(String projectName) {
+    public void createProject(String projectName) throws Exception {
+
     }
 
     @Override
-    public void train(String testCycleId, List<Verdict> verdicts, History history) {
-        verdictsByTestCycleId.put(testCycleId, verdicts);
-    }
+    public void train(TestCycle testCycle, List<Verdict> verdicts, History history) {
 
-    protected List<Verdict> getVerdicts(String testCycleId) {
-        return verdictsByTestCycleId.get(testCycleId);
     }
 }

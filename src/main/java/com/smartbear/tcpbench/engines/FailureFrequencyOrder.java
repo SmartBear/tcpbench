@@ -1,6 +1,7 @@
 package com.smartbear.tcpbench.engines;
 
 import com.smartbear.tcpbench.History;
+import com.smartbear.tcpbench.TestCycle;
 import com.smartbear.tcpbench.Verdict;
 
 import java.util.HashMap;
@@ -13,8 +14,8 @@ public class FailureFrequencyOrder extends AbstractEngine {
     private final Map<String, Integer> executionCountByTestId = new HashMap<>();
 
     @Override
-    public List<String> getOrdering(String testCycleId) {
-        return getVerdicts(testCycleId).stream()
+    public List<String> getOrdering(TestCycle testCycle) {
+        return testCycle.getVerdicts().stream()
                 .sorted((v1, v2) -> {
                     double t1Freq = freq(v1.getTestId());
                     double t2Freq = freq(v2.getTestId());
@@ -25,8 +26,7 @@ public class FailureFrequencyOrder extends AbstractEngine {
     }
 
     @Override
-    public void train(String testCycleId, List<Verdict> verdicts, History history) {
-        super.train(testCycleId, verdicts, history);
+    public void train(TestCycle testCycle, List<Verdict> verdicts, History history) {
         for (Verdict verdict : verdicts) {
             if (verdict.isFailure()) {
                 failureCountByTestId.put(verdict.getTestId(), failureCountByTestId.computeIfAbsent(verdict.getTestId(), n -> 0) + 1);

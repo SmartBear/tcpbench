@@ -34,9 +34,9 @@
             <version>0.43.1</version>
         </dependency>
         <dependency>
-            <groupId>com.smartesting.comet</groupId>
-            <artifactId>javaclient</artifactId>
-            <version>0.0.1</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.14.1</version>
         </dependency>
         <dependency>
             <groupId>me.tongfei</groupId>
@@ -47,6 +47,16 @@
             <groupId>com.beust</groupId>
             <artifactId>jcommander</artifactId>
             <version>1.82</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.5</version>
         </dependency>
     </dependencies>
 

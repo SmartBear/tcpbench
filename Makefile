@@ -7,7 +7,6 @@ JAVA_FILES = $(shell find src/main -name "*.java")
 svgs: results/rtptorrent/CloudifySource@cloudify.svg \
       results/rtptorrent/DSpace@DSpace.svg \
       results/rtptorrent/Graylog2@graylog2-server.svg \
-      results/rtptorrent/SonarSource@sonarqube.svg \
       results/rtptorrent/adamfisk@LittleProxy.svg \
       results/rtptorrent/apache@sling.svg \
       results/rtptorrent/brettwooldridge@HikariCP.svg \
@@ -23,6 +22,7 @@ svgs: results/rtptorrent/CloudifySource@cloudify.svg \
       results/rtptorrent/l0rdn1kk0n@wicket-bootstrap.svg \
       results/rtptorrent/neuland@jade4j.svg \
       results/rtptorrent/square@okhttp.svg \
+      results/rtptorrent/SonarSource@sonarqube.svg \
       results/rtptorrent/thinkaurelius@titan.svg
 
 results/rtptorrent/%.csv: scripts/tcpbench.sh target/tcpbench-0.0.1-SNAPSHOT.jar

@@ -15,6 +15,7 @@ public class Apfd {
         double apfd = 1 - ((double) sum / (N * M)) + (1d / (2 * N));
         if (apfd > 1) {
             System.err.printf("*** Unexpected APFD=%f outside [0:1] range. testCycleId=%s\n", apfd, testCycleId);
+            System.err.printf("1 - (%d / (%d * %d)) + (1 / (2 * %d))\n", sum, N, M, N);
             return 1;
         }
         if (apfd < 0) {

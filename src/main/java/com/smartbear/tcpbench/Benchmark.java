@@ -3,14 +3,12 @@ package com.smartbear.tcpbench;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import static com.smartbear.tcpbench.Apfd.computeApfd;
 
 public class Benchmark {
-    private static final int MINIMUM_TEST_CYCLE_VERDICT_COUNT = 6;
     private final TcpEngine tcpEngine;
     private final History history;
 
@@ -19,33 +17,23 @@ public class Benchmark {
         this.history = history;
     }
 
-    public void run(String projectName, Stream<String> testCycleIds, int trainingCount, int maxPredictionCount, Consumer<Double> apfdConsumer) throws Exception {
+    public void run(String projectName, Stream<TestCycle> trainingCycles, Stream<TestCycle> predictionCycles, Consumer<Double> apfdConsumer) throws Exception {
         tcpEngine.createProject(projectName);
 
-        AtomicInteger testCycleCounter = new AtomicInteger();
-        AtomicInteger predictionCounter = new AtomicInteger();
+        trainingCycles.forEach((testCycle) -> {
+            List<Verdict> verdicts = testCycle.getVerdicts();
+            tcpEngine.train(testCycle, verdicts, history);
+        });
 
-        testCycleIds.forEach((testCycleId) -> {
-            int testCycleCount = testCycleCounter.incrementAndGet();
-
-            List<Verdict> verdicts = history.getVerdicts(testCycleId);
-            tcpEngine.train(testCycleId, verdicts, history);
-
-            if (testCycleCount >= trainingCount) {
-                // We're done with the initial training
-                if (verdicts.size() >= MINIMUM_TEST_CYCLE_VERDICT_COUNT) {
-                    // There are enough verdicts in this test cycle that we might be interested in a prediction
-                    int predictionCount = predictionCounter.incrementAndGet();
-                    if (predictionCount <= maxPredictionCount) {
-                        List<String> ordering = tcpEngine.getOrdering(testCycleId);
-                        if (ordering != null) {
-                            List<String> orderingWithoutDuplicates = new ArrayList<>(new LinkedHashSet<>(ordering));
-                            double apfd = computeApfd(verdicts, orderingWithoutDuplicates, testCycleId);
-                            apfdConsumer.accept(apfd);
-                        }
-                    }
-                }
+        predictionCycles.forEach((testCycle) -> {
+            List<String> ordering = tcpEngine.getOrdering(testCycle);
+            List<Verdict> verdicts = testCycle.getVerdicts();
+            if (ordering != null) {
+                List<String> orderingWithoutDuplicates = new ArrayList<>(new LinkedHashSet<>(ordering));
+                double apfd = computeApfd(verdicts, orderingWithoutDuplicates, testCycle.getId());
+                apfdConsumer.accept(apfd);
             }
+            tcpEngine.train(testCycle, verdicts, history);
         });
     }
 }

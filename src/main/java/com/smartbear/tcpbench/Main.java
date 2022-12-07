@@ -7,9 +7,11 @@ import me.tongfei.progressbar.ProgressBar;
 
 import java.io.File;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 public class Main {
+    private static final int MINIMUM_TEST_CYCLE_VERDICT_COUNT = 6;
+
     @Parameter(names = {"-t", "--training"}, description = "Number of test cycles for initial training", required = true)
     int trainingCount;
 
@@ -37,12 +39,26 @@ public class Main {
         History history = RtpTorrentHistory.create(rtpTorrentProjectDir);
         Benchmark benchmark = new Benchmark(tcpEngine, history);
 
-        List<String> testCycleIds = history.getOrderedFailingTestCycleIds();
-        Stream<String> progressBarTestCycleIds = ProgressBar.wrap(testCycleIds.stream(), "Test Cycle");
+        List<TestCycle> testCycles = history.getOrderedFailingTestCycles();
+        List<TestCycle> testCyclesWithEnoughVerdicts = testCycles.stream().filter(tc -> tc.getVerdicts().size() >= MINIMUM_TEST_CYCLE_VERDICT_COUNT).collect(Collectors.toList());
 
-        benchmark.run(projectName, progressBarTestCycleIds, trainingCount, predictionCount, (Double apfd) -> {
-            System.out.println(apfd);
-        });
+        if (trainingCount + predictionCount > testCyclesWithEnoughVerdicts.size()) {
+            double trainingRatio = (double) trainingCount / (double) (trainingCount + predictionCount);
+            trainingCount = (int) (trainingRatio * testCyclesWithEnoughVerdicts.size());
+            predictionCount = testCyclesWithEnoughVerdicts.size() - trainingCount;
+        }
+
+        List<TestCycle> trainingTestCycles = testCyclesWithEnoughVerdicts.subList(0, trainingCount);
+        List<TestCycle> predictionTestCycles = testCyclesWithEnoughVerdicts.subList(trainingCount, trainingCount + predictionCount);
+
+        benchmark.run(
+                projectName,
+                ProgressBar.wrap(trainingTestCycles.stream(), "Training  "),
+                ProgressBar.wrap(predictionTestCycles.stream(), "Prediction"),
+                (Double apfd) -> {
+                    System.out.println(apfd);
+                }
+        );
 
     }
 }

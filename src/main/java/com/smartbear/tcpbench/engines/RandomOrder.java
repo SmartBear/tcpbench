@@ -1,5 +1,6 @@
 package com.smartbear.tcpbench.engines;
 
+import com.smartbear.tcpbench.TestCycle;
 import com.smartbear.tcpbench.Verdict;
 
 import java.util.Collections;
@@ -11,8 +12,8 @@ public class RandomOrder extends AbstractEngine {
     private final Random random = new Random(98765);
 
     @Override
-    public List<String> getOrdering(String testCycleId) {
-        List<String> testNames = getVerdicts(testCycleId).stream().map(Verdict::getTestId).collect(Collectors.toList());
+    public List<String> getOrdering(TestCycle testCycle) {
+        List<String> testNames = testCycle.getVerdicts().stream().map(Verdict::getTestId).collect(Collectors.toList());
         Collections.shuffle(testNames, random);
         return testNames;
     }

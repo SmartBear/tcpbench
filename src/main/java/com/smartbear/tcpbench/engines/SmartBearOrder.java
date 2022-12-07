@@ -3,6 +3,7 @@ package com.smartbear.tcpbench.engines;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.smartbear.tcpbench.History;
+import com.smartbear.tcpbench.TestCycle;
 import com.smartbear.tcpbench.Verdict;
 
 import java.io.BufferedReader;
@@ -49,9 +50,9 @@ public class SmartBearOrder extends AbstractEngine {
     }
 
     @Override
-    public List<String> getOrdering(String testCycleId) {
-        List<String> testNames = getVerdicts(testCycleId).stream().map(Verdict::getTestId).collect(Collectors.toList());
-        File changesetFile = changesetFileByTestCycleId.get(testCycleId);
+    public List<String> getOrdering(TestCycle testCycle) {
+        List<String> testNames = testCycle.getVerdicts().stream().map(Verdict::getTestId).collect(Collectors.toList());
+        File changesetFile = changesetFileByTestCycleId.get(testCycle.getId());
         try {
             return tcp(changesetFile, testNames);
         } catch (Exception e) {
@@ -60,11 +61,10 @@ public class SmartBearOrder extends AbstractEngine {
     }
 
     @Override
-    public void train(String testCycleId, List<Verdict> verdicts, History history) {
-        super.train(testCycleId, verdicts, history);
-        List<String> shas = history.getOrderedShas(testCycleId);
+    public void train(TestCycle testCycle, List<Verdict> verdicts, History history) {
+        List<String> shas = testCycle.getOrderedShas();
         if (shas.isEmpty()) {
-            System.err.printf("No git shas for testCycleId %s. TCP will only use priors\n", testCycleId);
+            System.err.printf("No git shas for testCycleId %s. TCP will only use priors\n", testCycle.getId());
             return;
         }
 
@@ -72,19 +72,19 @@ public class SmartBearOrder extends AbstractEngine {
         String newSha = shas.get(shas.size() - 1);
         try {
             File changesetFile = buildChangeset(oldSha, newSha, history.getRepository());
-            changesetFileByTestCycleId.put(testCycleId, changesetFile);
-            shaByTestCycleId.put(testCycleId, newSha);
+            changesetFileByTestCycleId.put(testCycle.getId(), changesetFile);
+            shaByTestCycleId.put(testCycle.getId(), newSha);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
         try {
-            File testReportFile = writeTestReport(testCycleId, verdicts);
+            File testReportFile = writeTestReport(testCycle.getId(), verdicts);
             List<String> args = new ArrayList<>(asList(
                     tcpTrain,
                     "--model", modelFile.getPath(),
                     "--test-report", testReportFile.getPath()));
-            File changesetFile = changesetFileByTestCycleId.get(testCycleId);
+            File changesetFile = changesetFileByTestCycleId.get(testCycle.getId());
             if (changesetFile != null) {
                 args.add("--changeset");
                 args.add(changesetFile.getPath());
