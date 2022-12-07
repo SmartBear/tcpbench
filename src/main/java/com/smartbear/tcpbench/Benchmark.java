@@ -1,7 +1,5 @@
 package com.smartbear.tcpbench;
 
-import me.tongfei.progressbar.ProgressBar;
-
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -28,17 +26,17 @@ public class Benchmark {
         AtomicInteger predictionCounter = new AtomicInteger();
 
         testCycleIds.forEach((testCycleId) -> {
-            int testCycleIndex = testCycleCounter.incrementAndGet();
+            int testCycleCount = testCycleCounter.incrementAndGet();
 
             List<Verdict> verdicts = history.getVerdicts(testCycleId);
             tcpEngine.train(testCycleId, verdicts, history);
 
-            if(testCycleIndex >= trainingCount) {
+            if (testCycleCount >= trainingCount) {
                 // We're done with the initial training
                 if (verdicts.size() >= MINIMUM_TEST_CYCLE_VERDICT_COUNT) {
                     // There are enough verdicts in this test cycle that we might be interested in a prediction
-                    int predictionIndex = predictionCounter.incrementAndGet();
-                    if(predictionIndex < maxPredictionCount) {
+                    int predictionCount = predictionCounter.incrementAndGet();
+                    if (predictionCount <= maxPredictionCount) {
                         List<String> ordering = tcpEngine.getOrdering(testCycleId);
                         if (ordering != null) {
                             List<String> orderingWithoutDuplicates = new ArrayList<>(new LinkedHashSet<>(ordering));
