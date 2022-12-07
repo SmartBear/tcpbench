@@ -1,16 +1,12 @@
 package com.smartbear.tcpbench;
 
-import java.time.Duration;
-
 public class Verdict {
     private final String testId;
     private final boolean failure;
-    private final Duration duration;
 
-    public Verdict(String testId, boolean failure, Duration duration) {
+    public Verdict(String testId, boolean failure) {
         this.testId = testId;
         this.failure = failure;
-        this.duration = duration;
     }
 
     public String getTestId() {
@@ -19,9 +15,5 @@ public class Verdict {
 
     public boolean isFailure() {
         return failure;
-    }
-
-    public Duration getDuration() {
-        return duration;
     }
 }

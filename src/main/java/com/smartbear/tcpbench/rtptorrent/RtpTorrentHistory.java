@@ -17,7 +17,6 @@ import tech.tablesaw.io.csv.CsvReadOptions;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -90,8 +89,8 @@ public class RtpTorrentHistory implements History {
                     .stream()
                     .map(testCase -> new Verdict(
                             testCase.getString("testName"),
-                            testCase.getInt("failures") > 0,
-                            Duration.ofMillis((long) (testCase.getDouble("duration") * 1000)))
+                            testCase.getInt("failures") > 0
+                            )
                     ).collect(toList());
         }
 

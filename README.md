@@ -2,10 +2,28 @@
 
 # Test Case Prioritization (TCP) Benchmark
 
-A command-line utility that calculates the [APFD] score for different Test Case Prioritization algorithms and
+A command-line utility that calculates the APTF score for different Test Case Prioritization algorithms and
 presents them as a box plot. See [results/rtptorrent/metrics.md](results/rtptorrent/metrics.md) for details.
 
 A [box plot] can be generated for each of the projects in the [RTPTorrent] dataset.
+
+## APTF
+
+The aim of a TCP algorithm is to order the test cases such that the ones that are bound to fail are run earlier in the testing progress.
+To quantify this goal we use a new metric to estimate the rate of test failures of a test suite.
+This is an adaptation of the [APFD] metric that uses *test failure* rather than *fault detection*.
+Following the naming conventions of the [APFD] metric, we call this new metric **Average Percentage of Test Failures** (APTF).
+
+Let `T` be a test suite containing `n` test cases, out of which `m` are failing. 
+Let `TFi` be the index of the `i`th failing test on ordering `T′` of `T`.
+The APTF of test suite `T′` is given by the equation:
+
+```math
+APTF = 1 - {\sum_{i=1}^m TF_i \over nm} + {1 \over 2n}
+```
+
+High values indicate that the test failures occur early in the testing process while low values indicate the test failures occur later. 
+Notice that the APTF metric is equivalent to the APFD metric in the case where each test reveals one different fault.
 
 ## Prerequisites
 

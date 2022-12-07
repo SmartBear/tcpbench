@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-import static com.smartbear.tcpbench.Apfd.computeApfd;
+import static com.smartbear.tcpbench.APTF.aptf;
 
 public class Benchmark {
     private final TcpEngine tcpEngine;
@@ -29,9 +29,8 @@ public class Benchmark {
             List<String> ordering = tcpEngine.getOrdering(testCycle);
             List<Verdict> verdicts = testCycle.getVerdicts();
             if (ordering != null) {
-                List<String> orderingWithoutDuplicates = new ArrayList<>(new LinkedHashSet<>(ordering));
-                double apfd = computeApfd(verdicts, orderingWithoutDuplicates, testCycle.getId());
-                apfdConsumer.accept(apfd);
+                double aptf = aptf(ordering, verdicts);
+                apfdConsumer.accept(aptf);
             }
             tcpEngine.train(testCycle, verdicts, history);
         });

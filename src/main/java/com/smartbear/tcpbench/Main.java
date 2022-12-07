@@ -55,8 +55,8 @@ public class Main {
                 projectName,
                 ProgressBar.wrap(trainingTestCycles.stream(), "Training  "),
                 ProgressBar.wrap(predictionTestCycles.stream(), "Prediction"),
-                (Double apfd) -> {
-                    System.out.println(apfd);
+                (Double aptf) -> {
+                    System.out.println(aptf);
                 }
         );
 
