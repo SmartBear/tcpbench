@@ -3,10 +3,9 @@
 # Test Case Prioritization (TCP) Benchmark
 
 A command-line utility that calculates the [APFD] score for different Test Case Prioritization algorithms and
-presents them as a [box plot].
+presents them as a box plot. See [results/rtptorrent/metrics.md](results/rtptorrent/metrics.md) for details.
 
-A box plot can be generated for each of the projects in the [RTPTorrent] dataset.
-See [results/rtptorrent/metrics.md](results/rtptorrent/metrics.md) for details.
+A [box plot] can be generated for each of the projects in the [RTPTorrent] dataset.
 
 ## Prerequisites
 
