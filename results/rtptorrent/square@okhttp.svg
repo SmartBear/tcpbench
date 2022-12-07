@@ -157,7 +157,8 @@
 	<g stroke='none' shape-rendering='crispEdges'>
 		<polygon fill = 'rgb(230, 159,   0)' fill-opacity = '0.250000' points = '491.43,85.49 574.09,85.49 574.09,85.49 491.43,85.49 '/>
 	</g>
-	<path stroke='black'  d='M491.43,85.49 L574.09,85.49 L491.43,85.49 Z  '/>	<path stroke='black'  d='M491.43,85.49 L574.09,85.49 M532.76,85.49 M523.76,85.49 L541.76,85.49 M523.76,85.49 L541.76,85.49  '/></g>
+	<path stroke='black'  d='M491.43,85.49 L574.09,85.49 L491.43,85.49 Z  '/>	<path stroke='black'  d='M491.43,85.49 L574.09,85.49 M532.76,85.49 M523.76,85.49 L541.76,85.49 M523.76,85.49 L541.76,85.49  '/>	<use xlink:href='#gpPt6' transform='translate(532.76,211.41) scale(4.50)' color='black'/>
+</g>
 	</g>
 	<g id="gnuplot_plot_5" ><title>gnuplot_plot_5</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">

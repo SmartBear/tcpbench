@@ -19,7 +19,7 @@ Let `TFi` be the index of the `i`th failing test on ordering `T′` of `T`.
 The APTF of test suite `T′` is given by the equation:
 
 ```math
-APTF = 1 - {{\sum_{i=1}^m TF_i} \over nm} + {1 \over 2n}
+APTF = 1 - {\sum_{i=1}^m TF_i \over nm} + {1 \over 2n}
 ```
 
 High values indicate that the test failures occur early in the testing process while low values indicate the test failures occur later. 
@@ -32,7 +32,6 @@ In order to generate the box plot metrics you need:
 * GNU Make
 * Gnuplot
 * Maven
-* A Comet API key (optional)
 * A build of SmartBear's TCP engine (optional)
 
 ## Usage
@@ -40,11 +39,6 @@ In order to generate the box plot metrics you need:
 Download and extract the [RTPTorrent dataset]. Define an environment variable pointing to the RTPTorrent directory:
 
     export RTP_TORRENT=...
-
-Define Comet environment variables (optional)
-
-    export COMET_URL=https://chiron.comet.smartesting.com
-    export COMET_API_KEY=...
 
 Define SmartBear TCP environment variables (optional)
 

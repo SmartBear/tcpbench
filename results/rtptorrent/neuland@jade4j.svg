@@ -129,7 +129,7 @@
 	<g stroke='none' shape-rendering='crispEdges'>
 		<polygon fill = 'rgb(  0, 158, 115)' fill-opacity = '0.250000' points = '255.27,446.13 337.93,446.13 337.93,292.31 255.27,292.31 '/>
 	</g>
-	<path stroke='black'  d='M255.27,446.13 L337.93,446.13 L337.93,292.31 L255.27,292.31 L255.27,446.13 Z  '/>	<path stroke='black'  d='M255.27,421.84 L337.93,421.84 M296.60,510.88 L296.60,446.13 M296.60,292.31 L296.60,189.21 M287.60,189.21 L305.60,189.21
+	<path stroke='black'  d='M255.27,446.13 L337.93,446.13 L337.93,292.31 L255.27,292.31 L255.27,446.13 Z  '/>	<path stroke='black'  d='M255.27,429.54 L337.93,429.54 M296.60,510.88 L296.60,446.13 M296.60,292.31 L296.60,189.21 M287.60,189.21 L305.60,189.21
 		M287.60,510.88 L305.60,510.88  '/></g>
 	</g>
 	<g id="gnuplot_plot_3" ><title>gnuplot_plot_3</title>
@@ -137,9 +137,9 @@
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g stroke='none' shape-rendering='crispEdges'>
-		<polygon fill = 'rgb( 86, 180, 233)' fill-opacity = '0.250000' points = '373.35,395.52 456.01,395.52 456.01,305.49 373.35,305.49 '/>
+		<polygon fill = 'rgb( 86, 180, 233)' fill-opacity = '0.250000' points = '373.35,392.49 456.01,392.49 456.01,311.08 373.35,311.08 '/>
 	</g>
-	<path stroke='black'  d='M373.35,395.52 L456.01,395.52 L456.01,305.49 L373.35,305.49 L373.35,395.52 Z  '/>	<path stroke='black'  d='M373.35,341.21 L456.01,341.21 M414.68,471.41 L414.68,395.52 M414.68,305.49 L414.68,281.46 M405.68,281.46 L423.68,281.46
+	<path stroke='black'  d='M373.35,392.49 L456.01,392.49 L456.01,311.08 L373.35,311.08 L373.35,392.49 Z  '/>	<path stroke='black'  d='M373.35,343.33 L456.01,343.33 M414.68,471.41 L414.68,392.49 M414.68,311.08 L414.68,281.46 M405.68,281.46 L423.68,281.46
 		M405.68,471.41 L423.68,471.41  '/></g>
 	</g>
 	<g id="gnuplot_plot_4" ><title>gnuplot_plot_4</title>
@@ -147,22 +147,22 @@
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g stroke='none' shape-rendering='crispEdges'>
-		<polygon fill = 'rgb(230, 159,   0)' fill-opacity = '0.250000' points = '491.43,115.02 574.09,115.02 574.09,94.99 491.43,94.99 '/>
+		<polygon fill = 'rgb(230, 159,   0)' fill-opacity = '0.250000' points = '491.43,116.80 574.09,116.80 574.09,98.03 491.43,98.03 '/>
 	</g>
-	<path stroke='black'  d='M491.43,115.02 L574.09,115.02 L574.09,94.99 L491.43,94.99 L491.43,115.02 Z  '/>	<path stroke='black'  d='M491.43,104.45 L574.09,104.45 M532.76,120.35 L532.76,115.02 M532.76,94.99 L532.76,90.44 M523.76,90.44 L541.76,90.44
-		M523.76,120.35 L541.76,120.35  '/></g>
+	<path stroke='black'  d='M491.43,116.80 L574.09,116.80 L574.09,98.03 L491.43,98.03 L491.43,116.80 Z  '/>	<path stroke='black'  d='M491.43,106.55 L574.09,106.55 M532.76,121.53 L532.76,116.80 M532.76,98.03 L532.76,90.44 M523.76,90.44 L541.76,90.44
+		M523.76,121.53 L541.76,121.53  '/>	<use xlink:href='#gpPt6' transform='translate(532.76,242.45) scale(4.50)' color='black'/>
+	<use xlink:href='#gpPt6' transform='translate(532.76,146.41) scale(4.50)' color='black'/>
+</g>
 	</g>
 	<g id="gnuplot_plot_5" ><title>gnuplot_plot_5</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g stroke='none' shape-rendering='crispEdges'>
-		<polygon fill = 'rgb(240, 228,  66)' fill-opacity = '0.250000' points = '609.51,114.43 692.17,114.43 692.17,90.44 609.51,90.44 '/>
+		<polygon fill = 'rgb(240, 228,  66)' fill-opacity = '0.250000' points = '609.51,115.61 692.17,115.61 692.17,90.44 609.51,90.44 '/>
 	</g>
-	<path stroke='black'  d='M609.51,114.43 L692.17,114.43 L692.17,90.44 L609.51,90.44 L609.51,114.43 Z  '/>	<path stroke='black'  d='M609.51,103.94 L692.17,103.94 M650.84,115.61 L650.84,114.43 M650.84,90.44 M641.84,90.44 L659.84,90.44 M641.84,115.61
-		L659.84,115.61  '/>	<use xlink:href='#gpPt6' transform='translate(650.84,244.74) scale(4.50)' color='black'/>
-	<use xlink:href='#gpPt6' transform='translate(632.84,244.74) scale(4.50)' color='black'/>
-</g>
+	<path stroke='black'  d='M609.51,115.61 L692.17,115.61 L692.17,90.44 L609.51,90.44 L609.51,115.61 Z  '/>	<path stroke='black'  d='M609.51,100.95 L692.17,100.95 M650.84,116.80 L650.84,115.61 M650.84,90.44 M641.84,90.44 L659.84,90.44 M641.84,116.80
+		L659.84,116.80  '/></g>
 	</g>
 <g fill="none" color="white" stroke="black" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
