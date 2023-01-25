@@ -33,6 +33,6 @@ jobs:
       - name: Build Comet Client
         run: cd comet-clients/java/comet-javaclient/ && mvn install
       - name: Sanity Check
-        run: make results/rtptorrent/CloudifySource@cloudify/com.smartbear.tcpbench.engines.InitialOrder.csv
+        run: make results/rtptorrent/CloudifySource@cloudify/com.smartbear.tcpbench.engines.OriginalOrder.csv
         env:
           RTP_TORRENT: ~/rtp-torrent
